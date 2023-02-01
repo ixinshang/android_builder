@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       target:
-      type: choice
-      description: '选择编译来源'
-      options:
-      - https://github.com/q215613905/TVBoxOS
-      - https://github.com/takagen99/Box
-      default: 'https://github.com/takagen99/Box'
+        type: choice
+        description: '选择编译来源'
+        options:
+        - https://github.com/q215613905/TVBoxOS
+        - https://github.com/takagen99/Box
+        default: 'https://github.com/takagen99/Box'
 jobs:
   build:
     runs-on: ubuntu-latest
