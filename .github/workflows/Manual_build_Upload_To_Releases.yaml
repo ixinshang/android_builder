@@ -1,6 +1,6 @@
 # 手动编译Tvbox，内置了2个。
 # 2023年2月1日16:38:25
-name: 手动编译Tvbox
+name: 手动编译Tvbox，并上传至Releases。
 
 on:
   workflow_dispatch:
@@ -44,3 +44,14 @@ jobs:
         with:
           name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
           path: ./**/*.apk
+      - name: 发布到Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
+          tag_name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
+          body_path: /project/README.md
+          draft: false
+          prerelease: false
+          files: ./**/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
