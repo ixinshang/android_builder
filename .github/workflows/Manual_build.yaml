@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo apt-get update
           echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-          NAME=$(echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1) >> $GITHUB_ENV
+          echo "NAME=$(echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1) >> $GITHUB_ENV
       - name: Clone project
         run: git clone --depth=1 ${{ github.event.inputs.target }} project
       - name: Build the app
