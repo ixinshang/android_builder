@@ -33,8 +33,12 @@ jobs:
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
+      - name: Test Rename
+        working-directory: ./project
+        run: |
+          mv ./**/*.apk ./**/${{ env.NAME }}-${{ env.FILE_DATE }}.apk
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: my-build-apk-${{ env.FILE_DATE }}-${{ env.NAME }}
+          name: my-build-apk-${{ env.NAME }}-${{ env.FILE_DATE }}
           path: ./**/*.apk
