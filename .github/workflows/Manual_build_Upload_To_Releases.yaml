@@ -47,14 +47,11 @@ jobs:
         with:
           name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
           path: ./**/*.apk
-      - name: 发布到Release
+      - name: Upload firmware to release
         uses: softprops/action-gh-release@v1
-        with:
-          name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
-          tag_name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
-#          body_path: /project/README.md
-          draft: false
-          prerelease: false
-          files: ./**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONSKEY }}
+        with:
+          tag_name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
+          body_path: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
+          files: ./**/*.apk
