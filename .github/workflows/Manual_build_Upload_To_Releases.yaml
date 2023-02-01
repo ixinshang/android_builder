@@ -53,4 +53,4 @@ jobs:
           files: project/app/build/outputs/apk/debug/*.apk
           tag_name: ${{ env.FILE_DATE }}
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONSKEY }}
+          github_token: ${{ secrets.ACTIONSKEY }}
