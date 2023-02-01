@@ -20,11 +20,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Time
+      - id: get-project
+        name: Time
         run: |
           sudo apt-get update
-          echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-          echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1
+          echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+          NAME=$(echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1) >> $GITHUB_ENV
       - name: Clone project
         run: git clone --depth=1 ${{ github.event.inputs.target }} project
       - name: Build the app
@@ -36,5 +37,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: my-build-apk-${{ env.FILE_DATE }}
+          name: my-build-apk-${{ env.FILE_DATE }}-${{ env.NAME }}
           path: ./**/*.apk
