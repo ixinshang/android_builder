@@ -49,9 +49,8 @@ jobs:
           path: ./**/*.apk
       - name: Upload firmware to release
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONSKEY }}
         with:
+          token: ${{ secrets.ACTIONSKEY }}
           tag_name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
           body_path: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
           files: /project/app/build/outputs/apk/debug/*.apk
