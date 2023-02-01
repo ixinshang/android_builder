@@ -47,10 +47,9 @@ jobs:
         with:
           name: Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}
           path: ./**/*.apk
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-#        body_path: CHANGELOG.md
-        files: ./app/build/outputs/apk/debug/Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}.apk
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACTIONSKEY }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./app/build/outputs/apk/debug/Tvbox-${{ env.NAME }}-${{ env.FILE_DATE }}.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTIONSKEY }}
