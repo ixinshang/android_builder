@@ -23,7 +23,8 @@ jobs:
       - name: Time
         run: |
           sudo apt-get update
-          echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV 
+          echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+          echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1
       - name: Clone project
         run: git clone --depth=1 ${{ github.event.inputs.target }} project
       - name: Build the app
