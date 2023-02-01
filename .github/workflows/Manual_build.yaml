@@ -12,6 +12,8 @@ on:
         - https://github.com/q215613905/TVBoxOS
         - https://github.com/takagen99/Box
         default: 'https://github.com/takagen99/Box'
+env:
+  TZ: Asia/Shanghai
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +27,7 @@ jobs:
       - id: get-project
         name: Time
         run: |
+          sudo timedatectl set-timezone "$TZ"
           echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
           echo "NAME=$(echo ${{ github.event.inputs.target }} | cut -d '/' -f 4- | cut -d '/' -f 1)" >> $GITHUB_ENV
       - name: Clone project
