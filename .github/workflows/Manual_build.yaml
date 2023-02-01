@@ -1,4 +1,4 @@
-name: 测试编译安卓APK
+name: 手动选择编译安卓APK
 
 on:
   workflow_dispatch:
@@ -20,6 +20,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Time
+        run: |
+          sudo apt-get update
+          echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV 
       - name: Clone project
         run: git clone --depth=1 ${{ github.event.inputs.target }} project
       - name: Build the app
@@ -31,5 +35,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: my-build-apk
+          name: my-build-apk-${{ env.FILE_DATE }}
           path: ./**/*.apk
